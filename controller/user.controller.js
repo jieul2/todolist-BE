@@ -5,13 +5,13 @@ const saltRounds = 10;
 const userController = {};
 
 // 색상 랜덤 생성 함수
-const generatePastelColor = () => {
-  const r = Math.floor(Math.random() * 127 + 128); // 128 ~ 255 사이 (밝은 톤)
-  const g = Math.floor(Math.random() * 127 + 128);
-  const b = Math.floor(Math.random() * 127 + 128);
+// const generatePastelColor = () => {
+//   const r = Math.floor(Math.random() * 127 + 128); // 128 ~ 255 사이 (밝은 톤)
+//   const g = Math.floor(Math.random() * 127 + 128);
+//   const b = Math.floor(Math.random() * 127 + 128);
 
-  return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
-};
+//   return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
+// };
 
 userController.createUser = async (req, res) => {
   try {
@@ -23,9 +23,10 @@ userController.createUser = async (req, res) => {
     const salt = bcrypt.genSaltSync(saltRounds);
     const hash = bcrypt.hashSync(password, salt);
 
-    const userColor = color || generatePastelColor();
+    // const userColor = color || generatePastelColor();
 
-    const newUser = new User({ email, name, password: hash, color: userColor });
+    // const newUser = new User({ email, name, password: hash, color: userColor });
+    const newUser = new User({ email, name, password: hash });
     await newUser.save();
     res.status(200).json({ status: "success" });
   } catch (err) {
