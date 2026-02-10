@@ -11,8 +11,13 @@ const taskSchema = Schema(
       type: Boolean,
       required: true,
     },
+    author: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
   },
-  { timestamps: true },
+  { timestamps: true }, // 이게 있으면 createAt, updateAt 생김.
 );
 
 const Task = mongoose.model("Task", taskSchema);
